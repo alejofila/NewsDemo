@@ -12,6 +12,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.Mockito
+import org.mockito.internal.verification.VerificationModeFactory
 import org.mockito.junit.MockitoJUnitRunner
 
 
@@ -36,9 +37,10 @@ class NewsListPresenterTest{
     fun `test zero news`(){
         val singleEmptyList = Single.just(emptyList<News>())
         Mockito.`when`(repository.getAllNews()).thenReturn(singleEmptyList)
-        presenter.getNewsList()
+        presenter.onStart()
         testScheduler.triggerActions()
-        Mockito.verify(view).showNoNewsMessage()
+        Mockito.verify(view,VerificationModeFactory.times(1)).showLoadingState()
+        Mockito.verify(view, VerificationModeFactory.times(1)).showNoNewsMessage()
 
     }
 
@@ -49,9 +51,10 @@ class NewsListPresenterTest{
         val news = listOf(newsMock)
         val singleNews = Single.just(news)
         Mockito.`when`(repository.getAllNews()).thenReturn(singleNews)
-        presenter.getNewsList()
+        presenter.onStart()
         testScheduler.triggerActions()
-        Mockito.verify(view).showNewsList(anything())
+        Mockito.verify(view,VerificationModeFactory.times(1)).showLoadingState()
+        Mockito.verify(view,VerificationModeFactory.times(1)).showNewsList(anything())
     }
 
 
