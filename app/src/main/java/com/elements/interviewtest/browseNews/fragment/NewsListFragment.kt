@@ -8,8 +8,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
-
 import com.elements.interviewtest.R
 import com.elements.interviewtest.browseNews.adapter.NewsAdapter
 import com.elements.interviewtest.browseNews.presenter.NewsListPresenter
@@ -24,6 +24,7 @@ import io.reactivex.schedulers.Schedulers
 
 class NewsListFragment : Fragment(), NewsListView {
 
+    private lateinit var contentLoadingProgressBar: ProgressBar
     private lateinit var newsRecyclerView: RecyclerView
     private lateinit var adapter: NewsAdapter
     lateinit var fragmentNavigationCallback: FragmentNavigationCallback
@@ -43,13 +44,23 @@ class NewsListFragment : Fragment(), NewsListView {
     }
 
     override fun showNewsList(list: MutableList<NewsUiModel>) {
+        newsRecyclerView.visibility = View.VISIBLE
         adapter.newsUiModels = list
+    }
+
+    override fun showLoadingState() {
+        contentLoadingProgressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLoadingState() {
+        contentLoadingProgressBar.visibility = View.GONE
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_news_list, container, false)
         newsRecyclerView = view?.findViewById(R.id.news_recyclerview) as RecyclerView
+        contentLoadingProgressBar = view.findViewById(R.id.progress_bar)
         val newsRepository = NewsRepositoryFactory.getNewsRepository()
         // This could be done with a dependency injection tool like dagger
         newsListPresenter = NewsListPresenter(this, GetNewsUseCase(newsRepository),
@@ -73,7 +84,7 @@ class NewsListFragment : Fragment(), NewsListView {
 
     override fun onStop() {
         super.onStop()
-        newsListPresenter?.onStop()
+        newsListPresenter.onStop()
 
     }
 

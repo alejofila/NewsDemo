@@ -16,6 +16,7 @@ class NewsListPresenter(val view: NewsListView,
         getNewsList()
     }
     fun getNewsList() {
+        view.showLoadingState()
         disposableBag?.add(getNewsUseCase()
                 .flattenAsObservable { it }
                 .map { news-> NewsMapper.fromDomainToUiModel(news) }
@@ -25,9 +26,11 @@ class NewsListPresenter(val view: NewsListView,
                 .observeOn(mainScheduler)
                 .subscribe { news ->
                     if(news.isNotEmpty()){
+                        view.hideLoadingState()
                         view.showNewsList(news)
                     }
                     else{
+                        view.hideLoadingState()
                         view.showNoNewsMessage()
                     }
                 })
@@ -36,6 +39,8 @@ class NewsListPresenter(val view: NewsListView,
 }
 
 interface NewsListView {
+    fun hideLoadingState()
+    fun showLoadingState()
     fun showNewsList(list: MutableList<NewsUiModel>)
     fun showNoNewsMessage()
 }
