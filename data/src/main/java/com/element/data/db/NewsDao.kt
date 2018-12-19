@@ -14,10 +14,6 @@ interface NewsDao {
     @Query("SELECT * FROM news")
     fun getAllnews(): Single<List<NewsEntity>>
 
-    /*
-    @Query("SELECT * FROM news WHERE shop_id == :shop_id")
-    fun getShopById(shop_id: String): Single<NewsEntity>
-    */
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(vararg news: NewsEntity)
