@@ -1,0 +1,31 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+def room_version = "1.1.1"
+
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.3'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    api "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+    // use kapt for Kotlin
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    // optional - RxJava support for Room
+    api "android.arch.persistence.room:rxjava2:$room_version"
+    implementation project(path: ':domain')
+    implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
+    implementation 'org.apache.commons:commons-text:1.6'
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"
+repositories {
+    mavenCentral()
+}

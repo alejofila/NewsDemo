@@ -1,0 +1,7 @@
+
+class TestGetShopUseCase{
+
+    fun vt(){
+
+    }
+}
