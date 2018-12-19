@@ -40,8 +40,6 @@ class NewsActivity : AppCompatActivity(), FragmentNavigationCallback {
     }
 
 
-
-
 }
 
 interface FragmentNavigationCallback {
