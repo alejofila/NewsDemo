@@ -13,7 +13,7 @@ class NewsActivity : AppCompatActivity(), FragmentNavigationCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_shops)
+        setContentView(R.layout.activity_news)
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
         if(supportFragmentManager.findFragmentById(R.id.content) == null){
