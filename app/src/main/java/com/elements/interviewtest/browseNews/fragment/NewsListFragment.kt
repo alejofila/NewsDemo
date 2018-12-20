@@ -15,20 +15,17 @@ import com.elements.interviewtest.browseNews.adapter.NewsAdapter
 import com.elements.interviewtest.browseNews.presenter.NewsListPresenter
 import com.elements.interviewtest.browseNews.presenter.NewsListView
 import com.elements.interviewtest.common.activity.FragmentNavigationCallback
-import com.elements.interviewtest.common.dependency.NewsRepositoryFactory
 import com.elements.interviewtest.common.uimodel.NewsUiModel
 import com.elements.interviewtest.newsdetail.fragment.NewsDetailFragment
-import com.example.domain.usecases.GetNewsUseCase
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import org.koin.android.ext.android.inject
 
 class NewsListFragment : Fragment(), NewsListView {
 
     private lateinit var contentLoadingProgressBar: ProgressBar
     private lateinit var newsRecyclerView: RecyclerView
     private lateinit var adapter: NewsAdapter
-    lateinit var fragmentNavigationCallback: FragmentNavigationCallback
-    lateinit var newsListPresenter: NewsListPresenter
+    private lateinit var fragmentNavigationCallback: FragmentNavigationCallback
+    private val newsListPresenter: NewsListPresenter by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,10 +58,8 @@ class NewsListFragment : Fragment(), NewsListView {
         val view = inflater.inflate(R.layout.fragment_news_list, container, false)
         newsRecyclerView = view?.findViewById(R.id.news_recyclerview) as RecyclerView
         contentLoadingProgressBar = view.findViewById(R.id.progress_bar)
-        val newsRepository = NewsRepositoryFactory.getNewsRepository()
         // This could be done with a dependency injection tool like dagger
-        newsListPresenter = NewsListPresenter(this, GetNewsUseCase(newsRepository),
-                AndroidSchedulers.mainThread(), Schedulers.io())
+        newsListPresenter.view = this
         newsRecyclerView.adapter = adapter
         newsRecyclerView.layoutManager = LinearLayoutManager(activity)
         return view

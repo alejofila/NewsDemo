@@ -4,10 +4,12 @@ import com.elements.interviewtest.common.presenter.BasePresenter
 import com.elements.interviewtest.common.uimodel.NewsUiModel
 import io.reactivex.Scheduler
 
-class NewsListPresenter(val view: NewsDetailView,
-                        private val newsUiModel: NewsUiModel,
-                        mainScheduler: Scheduler,
-                        backgroundScheduler: Scheduler) : BasePresenter(mainScheduler,backgroundScheduler) {
+class NewsDetailPresenter(
+                          mainScheduler: Scheduler,
+                          backgroundScheduler: Scheduler) : BasePresenter(mainScheduler,backgroundScheduler) {
+    lateinit var view: NewsDetailView
+    lateinit var newsUiModel: NewsUiModel
+
     override fun onStart() {
         showNewsDetails(newsUiModel)
     }

@@ -7,29 +7,29 @@ import com.elements.interviewtest.common.uimodel.NewsUiModel
 import com.example.domain.usecases.GetNewsUseCase
 import io.reactivex.Scheduler
 
-class NewsListPresenter(val view: NewsListView,
-                        private val getNewsUseCase: GetNewsUseCase,
-                        mainScheduler: Scheduler,
-                        backgroundScheduler: Scheduler) : BasePresenter(mainScheduler,backgroundScheduler) {
-
-    override fun onStart(){
+class NewsListPresenter(
+        private val getNewsUseCase: GetNewsUseCase,
+        mainScheduler: Scheduler,
+        backgroundScheduler: Scheduler) : BasePresenter(mainScheduler, backgroundScheduler) {
+    lateinit var view: NewsListView
+    override fun onStart() {
         getNewsList()
     }
+
     fun getNewsList() {
         view.showLoadingState()
         disposableBag?.add(getNewsUseCase()
                 .flattenAsObservable { it }
-                .map { news-> NewsMapper.fromDomainToUiModel(news) }
+                .map { news -> NewsMapper.fromDomainToUiModel(news) }
                 .toList()
                 .map { it.toMutableList() }
                 .subscribeOn(backgroundScheduler)
                 .observeOn(mainScheduler)
                 .subscribe { news ->
-                    if(news.isNotEmpty()){
+                    if (news.isNotEmpty()) {
                         view.hideLoadingState()
                         view.showNewsList(news)
-                    }
-                    else{
+                    } else {
                         view.hideLoadingState()
                         view.showNoNewsMessage()
                     }

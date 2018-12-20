@@ -2,6 +2,8 @@ package com.elements.interviewtest
 
 import android.app.Application
 import android.content.Context
+import com.elements.interviewtest.di.newsModule
+import org.koin.android.ext.android.startKoin
 
 class ElementApp : Application() {
 
@@ -17,5 +19,8 @@ class ElementApp : Application() {
         }
     }
 
-
+    override fun onCreate() {
+        super.onCreate()
+        startKoin(this, listOf(newsModule))
+    }
 }

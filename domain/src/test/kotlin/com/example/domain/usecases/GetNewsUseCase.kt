@@ -33,7 +33,8 @@ class GetNewsUseCaseTest {
     @Test
     fun `test getting list of multiple news`() {
         val news = mock(News::class.java)
-        val list = listOf(news, news,news)
+        val news2 =  mock(News::class.java)
+        val list = listOf(news, news2)
         Mockito.`when`(newsRepository.getAllNews()).thenReturn(Single.just(list))
         val testObserver = getNewsUseCase().test()
         testObserver.assertValue{it==list}

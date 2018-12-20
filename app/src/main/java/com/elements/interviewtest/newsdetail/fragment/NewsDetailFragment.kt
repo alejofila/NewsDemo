@@ -16,22 +16,21 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.elements.interviewtest.R
 import com.elements.interviewtest.common.uimodel.NewsUiModel
+import com.elements.interviewtest.newsdetail.presenter.NewsDetailPresenter
 import com.elements.interviewtest.newsdetail.presenter.NewsDetailView
-import com.elements.interviewtest.newsdetail.presenter.NewsListPresenter
 import com.squareup.picasso.Picasso
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import org.koin.android.ext.android.inject
 
 
 class NewsDetailFragment : Fragment(), NewsDetailView {
 
 
     lateinit var toolbar: Toolbar
-    lateinit var constraintRoot: ConstraintLayout
-    lateinit var newsTitleView: TextView
-    lateinit var newsDescriptionView: TextView
-    lateinit var newsImageView: ImageView
-    lateinit var newsDetailPresenter: NewsListPresenter
+    private lateinit var constraintRoot: ConstraintLayout
+    private lateinit var newsTitleView: TextView
+    private lateinit var newsDescriptionView: TextView
+    private lateinit var newsImageView: ImageView
+    private val newsDetailPresenter: NewsDetailPresenter by inject()
     var fab: FloatingActionButton? = null
 
 
@@ -43,8 +42,9 @@ class NewsDetailFragment : Fragment(), NewsDetailView {
         newsImageView = rootView.findViewById(R.id.news_image)
         fab = rootView.findViewById(R.id.fab)
         addAnimationOperations()
-        val newsUiModel: NewsUiModel? = arguments?.getParcelable(KEY_NEWS)
-        newsDetailPresenter = NewsListPresenter(this, newsUiModel!!, AndroidSchedulers.mainThread(), Schedulers.io())
+        val newsUiModel: NewsUiModel = arguments?.getParcelable(KEY_NEWS)!!
+        newsDetailPresenter.newsUiModel = newsUiModel
+        newsDetailPresenter.view = this
         return rootView
     }
 
@@ -54,7 +54,7 @@ class NewsDetailFragment : Fragment(), NewsDetailView {
         val constraint1 = ConstraintSet()
         constraint1.clone(constraintRoot)
         val constraint2 = ConstraintSet()
-        val constraintLayout2 = LayoutInflater.from(context).inflate(R.layout.news_detail_fragment_alt,null).findViewById<ConstraintLayout>(R.id.constraint_root)
+        val constraintLayout2 = LayoutInflater.from(context).inflate(R.layout.news_detail_fragment_alt, null).findViewById<ConstraintLayout>(R.id.constraint_root)
         constraint2.clone(constraintLayout2)
 
         fab?.setOnClickListener {
@@ -62,7 +62,7 @@ class NewsDetailFragment : Fragment(), NewsDetailView {
                 TransitionManager.beginDelayedTransition(constraintRoot)
                 val constraint = if (set) constraint1 else constraint2
                 constraint.applyTo(constraintRoot)
-                val fabDrawable = if(set) R.drawable.ic_zoom else R.drawable.ic_zoom_out
+                val fabDrawable = if (set) R.drawable.ic_zoom else R.drawable.ic_zoom_out
                 set = !set
                 fab?.setImageResource(fabDrawable)
 
