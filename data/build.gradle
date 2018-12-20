@@ -6,6 +6,10 @@ def room_version = "1.1.1"
 android {
     compileSdkVersion compile_sdk_version
     buildToolsVersion build_tools_version
+    sourceSets {
+        main { java.srcDirs = ['src/main/java'] }
+        test { java.srcDirs = ['src/test/java'] }
+    }
 }
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
@@ -22,6 +26,12 @@ dependencies {
     implementation project(path: ':domain')
     implementation 'org.apache.directory.studio:org.apache.commons.io:2.4'
     implementation 'org.apache.commons:commons-text:1.6'
+
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'org.mockito:mockito-core:2.23.0'
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    implementation 'de.siegmar:fastcsv:1.0.3'
+
 }
 
 sourceCompatibility = "1.7"
