@@ -1,10 +1,10 @@
-package com.element.data.db
+package com.alejofila.data.db
 
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import android.content.Context
-import com.element.data.model.NewsEntity
+import com.alejofila.data.model.NewsEntity
 
 
 @Database(entities = [NewsEntity::class],

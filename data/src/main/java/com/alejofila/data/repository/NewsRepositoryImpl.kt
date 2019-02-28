@@ -1,11 +1,11 @@
-package com.element.data.repository
+package com.alejofila.data.repository
 
 
-import com.element.data.api.NewsApi
-import com.element.data.db.NewsDao
-import com.element.data.file.NewsCsvParser
-import com.element.data.mapper.NewsEntityMapper
-import com.element.data.utils.ConnectivityManagerWrapper
+import com.alejofila.data.api.NewsApi
+import com.alejofila.data.db.NewsDao
+import com.alejofila.data.file.NewsCsvParser
+import com.alejofila.data.mapper.NewsEntityMapper
+import com.alejofila.data.utils.ConnectivityManagerWrapper
 import com.example.domain.NewsRepository
 import com.example.domain.model.News
 import io.reactivex.Single

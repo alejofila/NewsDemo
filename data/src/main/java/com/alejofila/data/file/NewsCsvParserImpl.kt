@@ -1,6 +1,6 @@
-package com.element.data.file
+package com.alejofila.data.file
 
-import com.element.data.model.NewsEntity
+import com.alejofila.data.model.NewsEntity
 import de.siegmar.fastcsv.reader.CsvReader
 import okhttp3.internal.Util
 import org.apache.commons.io.IOUtils

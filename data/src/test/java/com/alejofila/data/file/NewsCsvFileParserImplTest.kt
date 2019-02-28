@@ -1,6 +1,6 @@
-package com.element.data.file
+package com.alejofila.data.file
 
-import com.element.data.file.NewsCsvParserImpl.Companion.INVALID_URL
+import com.alejofila.data.file.NewsCsvParserImpl.Companion.INVALID_URL
 import junit.framework.Assert
 import org.apache.commons.io.IOUtils
 import org.junit.Before

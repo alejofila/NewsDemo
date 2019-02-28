@@ -1,4 +1,4 @@
-package com.element.data.utils
+package com.alejofila.data.utils
 
 import io.reactivex.Single
 

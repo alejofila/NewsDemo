@@ -1,6 +1,6 @@
-package com.element.data.file
+package com.alejofila.data.file
 
-import com.element.data.model.NewsEntity
+import com.alejofila.data.model.NewsEntity
 import java.io.InputStream
 
 interface NewsCsvParser{

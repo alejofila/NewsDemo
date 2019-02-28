@@ -1,6 +1,6 @@
-package com.element.data.mapper
+package com.alejofila.data.mapper
 
-import com.element.data.model.NewsEntity
+import com.alejofila.data.model.NewsEntity
 import com.example.domain.model.News
 
 
