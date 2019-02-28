@@ -1,5 +1,5 @@
 
-##Sample demo
+## Sample demo
 The main objective of this demo is to show a list of _news_. 
 The **data source** is an endpoint thar returns a CSV file, the projects showcase some popular topics in **android development world** : 
 
