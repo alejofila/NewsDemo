@@ -11,7 +11,7 @@ android {
   }
 
   defaultConfig {
-    applicationId "com.elements.interviewtest"
+    applicationId "com.alejofila.newsdemo"
     minSdkVersion min_sdk_version
     targetSdkVersion target_sdk_version
     versionCode 1
@@ -44,6 +44,7 @@ dependencies {
     implementation "com.android.support:cardview-v7:$app_compat_version"
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-android:$koin_version"
+
 }
 repositories {
     mavenCentral()

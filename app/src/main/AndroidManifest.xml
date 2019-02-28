@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.elements.interviewtest">
+          package="com.alejofila.newsdemo">
 
   <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -17,7 +17,7 @@
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
       android:supportsRtl="true"
-      android:name="com.elements.interviewtest.ElementApp"
+      android:name="com.alejofila.newsdemo.App"
       android:theme="@style/AppTheme"
       tools:ignore="GoogleAppIndexingWarning">
 
@@ -34,7 +34,7 @@
         android:value="@string/google_maps_key"/>
 
     <activity
-        android:name="com.elements.interviewtest.common.activity.NewsActivity">
+        android:name="com.alejofila.newsdemo.common.activity.NewsActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 

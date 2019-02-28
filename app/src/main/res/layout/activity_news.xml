@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context="com.elements.interviewtest.common.activity.NewsActivity">
+    tools:context="com.alejofila.newsdemo.common.activity.NewsActivity">
   <android.support.design.widget.AppBarLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content">
