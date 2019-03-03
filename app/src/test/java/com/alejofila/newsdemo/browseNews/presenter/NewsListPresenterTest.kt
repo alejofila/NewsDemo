@@ -35,7 +35,7 @@ class NewsListPresenterTest{
 
     }
     @Test
-    fun `test zero news`(){
+    fun `zero news should call showNoMessage`(){
         val singleEmptyList = Single.just(emptyList<News>())
         Mockito.`when`(repository.getAllNews()).thenReturn(singleEmptyList)
         presenter.onStart()
@@ -47,7 +47,7 @@ class NewsListPresenterTest{
 
 
     @Test
-    fun `test single news`(){
+    fun `a list of one news should call showNewsList`(){
         val newsMock = News("","","")
         val news = listOf(newsMock)
         val singleNews = Single.just(news)
@@ -58,7 +58,7 @@ class NewsListPresenterTest{
         Mockito.verify(view,VerificationModeFactory.times(1)).showNewsList(anything())
     }
     @Test
-    fun `test multiple news`(){
+    fun `a list of multiple news should call showNewsList`(){
         val newsMock = News("","","")
         val newsMock2 = News("abc","bc","asda")
         val newsMock3 = News("abcd","asd","asd")
